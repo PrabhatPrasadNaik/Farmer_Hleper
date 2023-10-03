@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload and Record</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="file"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload and Record</h1>
+        <form id="uploadForm">
+            <input type="file" id="image" accept="image/*" required>
+            <textarea id="description" placeholder="Description" required></textarea>
+            <audio id="audio" controls></audio>
+            <button type="button" id="recordButton" class="btn">Start Recording</button>
+            <button type="button" id="stopButton" class="btn">Stop Recording</button>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        const uploadForm = document.getElementById("uploadForm");
+        const imageInput = document.getElementById("image");
+        const descriptionInput = document.getElementById("description");
+        const audioElement = document.getElementById("audio");
+        const recordButton = document.getElementById("recordButton");
+        const stopButton = document.getElementById("stopButton");
+
+        let mediaRecorder;
+        let audioChunks = [];
+
+        imageInput.addEventListener("change", () => {
+            // Handle image upload here
+            const selectedImage = imageInput.files[0];
+            console.log("Image selected:", selectedImage);
+        });
+
+        recordButton.addEventListener("click", () => {
+            // Start recording audio
+            navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = (e) => {
+                    audioChunks.push(e.data);
+                };
+
+                mediaRecorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    audioElement.src = audioUrl;
+                };
+
+                mediaRecorder.start();
+            });
+        });
+
+        stopButton.addEventListener("click", () => {
+            // Stop recording audio
+            mediaRecorder.stop();
+        });
+
+        uploadForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            // Handle form submission (including image, description, and audio) here
+
+            // For now, let's just display the description and audio duration
+            const description = descriptionInput.value;
+            const audioDuration = audioElement.duration.toFixed(2);
+            alert(`Description: ${description}\nAudio Duration (seconds): ${audioDuration}`);
+        });
+    </script>
+</body>
+</html>

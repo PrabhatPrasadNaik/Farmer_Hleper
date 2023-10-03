@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Challenge</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        img {
+            max-width: 100%;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Challenge</h1>
+        <img id="challengeImage" src="#" alt="Challenge Image">
+        <textarea id="solution" placeholder="Your Solution" required></textarea>
+        <button type="button" id="submitSolution" class="btn">Submit</button>
+    </div>
+
+    <script>
+        const challengeImage = document.getElementById("challengeImage");
+        const solutionTextarea = document.getElementById("solution");
+        const submitButton = document.getElementById("submitSolution");
+
+        // Simulated image source (replace with actual image URL)
+        const imageUrl = "https://via.placeholder.com/300";
+
+        // Simulated function to fetch the image
+        function fetchImage() {
+            challengeImage.src = imageUrl;
+        }
+
+        // Load the initial image when the page loads
+        window.addEventListener("load", fetchImage);
+
+        submitButton.addEventListener("click", () => {
+            const solution = solutionTextarea.value;
+
+            // Simulated function to send the solution to the server
+            submitSolutionToServer(solution);
+
+            // Clear the textarea
+            solutionTextarea.value = "";
+
+            // Load the next challenge image (you can replace this logic)
+            fetchImage();
+        });
+
+        // Simulated function to submit the solution to the server
+        function submitSolutionToServer(solution) {
+            // You would typically use AJAX or fetch API to send the solution to the server
+            // For this example, we'll just log the solution to the console
+            console.log("Solution submitted:", solution);
+        }
+    </script>
+</body>
+</html>

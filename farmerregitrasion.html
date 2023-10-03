@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="text"], input[type="password"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registration</h1>
+        <form id="registrationForm">
+            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="text" id="userId" placeholder="User ID" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="tel" id="mobileNo" placeholder="Mobile No" required>
+            <input type="text" id="farmerId" placeholder="Farmer ID" required>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        const registrationForm = document.getElementById("registrationForm");
+
+        registrationForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            // Retrieve values from form fields
+            const fullName = document.getElementById("fullName").value;
+            const userId = document.getElementById("userId").value;
+            const password = document.getElementById("password").value;
+            const mobileNo = document.getElementById("mobileNo").value;
+            const farmerId = document.getElementById("farmerId").value;
+
+            // Implement registration logic here, e.g., sending data to a server
+            // You can use AJAX or fetch API to send the data to the server
+
+            // For now, let's just display the values in an alert
+            alert(`Full Name: ${fullName}\nUser ID: ${userId}\nPassword: ${password}\nMobile No: ${mobileNo}\nFarmer ID: ${farmerId}`);
+        });
+    </script>
+</body>
+</html>

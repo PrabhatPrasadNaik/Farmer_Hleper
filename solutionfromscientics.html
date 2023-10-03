@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .chat-container {
+            text-align: left;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .user-message {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: right;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Chatbot</h1>
+        <div class="chat-container">
+            <div class="user-message">User: Hello, chatbot!</div>
+            <div class="chatbot-message">Chatbot: Hi! How can I assist you today?</div>
+        </div>
+        <textarea id="userInput" placeholder="Type your message..." required></textarea>
+        <button type="button" id="sendMessage" class="btn">Send</button>
+    </div>
+
+    <script>
+        const chatbotMessages = [
+            "Chatbot: Hi! How can I assist you today?",
+            "Chatbot: Please describe the issue you're facing.",
+            "Chatbot: I'm here to help you with any questions you have.",
+        ];
+
+        const chatContainer = document.querySelector(".chat-container");
+        const userInput = document.getElementById("userInput");
+        const sendMessageBtn = document.getElementById("sendMessage");
+
+        // Function to simulate the chatbot's response
+        function chatbotResponse() {
+            const userMessage = userInput.value;
+            const userMessageElement = document.createElement("div");
+            userMessageElement.className = "user-message";
+            userMessageElement.textContent = "User: " + userMessage;
+            chatContainer.appendChild(userMessageElement);
+
+            const chatbotMessageElement = document.createElement("div");
+            chatbotMessageElement.className = "chatbot-message";
+            chatbotMessageElement.textContent =
+                chatbotMessages[Math.floor(Math.random() * chatbotMessages.length)];
+            chatContainer.appendChild(chatbotMessageElement);
+
+            // Clear the user input
+            userInput.value = "";
+        }
+
+        sendMessageBtn.addEventListener("click", chatbotResponse);
+
+        // Simulate the chatbot's initial greeting
+        setTimeout(() => {
+            const chatbotMessageElement = document.createElement("div");
+            chatbotMessageElement.className = "chatbot-message";
+            chatbotMessageElement.textContent = "Chatbot: Hi! How can I assist you today?";
+            chatContainer.appendChild(chatbotMessageElement);
+        }, 1000); // Delay the initial chatbot message for demonstration purposes
+    </script>
+</body>
+</html>
